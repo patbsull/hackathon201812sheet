@@ -1,0 +1,5 @@
+<aura:component>
+    <lightning:card>
+    //hi there
+    </lightning:card>
+</aura:component>
