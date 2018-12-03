@@ -1,0 +1,54 @@
+<aura:component>
+    <!-- attributes -->
+    <aura:attribute name="columns" type="List" default="[]"/>
+    <aura:attribute name="data" type="List" default="[]"/>
+    <aura:attribute name="keyField" type="String" default="id"/>
+    <aura:attribute name="selectedRowsCount" type="Integer" default="0"/>
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>
+    <aura:attribute name="sortedBy" type="String"/>
+    <aura:attribute name="sortedDirection" type="String"/>
+    <aura:attribute name="defaultSortDirection" type="String"/>
+    <aura:attribute name="rowNumberOffset" type="Integer" default="0"/>
+    <aura:attribute name="initialRows" type="Integer" default="10"/>
+    <aura:attribute name="dataTableSchema" type="Object"/>
+
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    
+    <lightning:card>
+        <div class="slds-is-relative">
+            <!-- toolbox -->
+            <div class="slds-m-vertical_small">
+                <h1 class="slds-m-vertical_small">Total Rows: {! v.data.length }</h1>
+                <h1 class="slds-m-vertical_small">Selected Rows: {! v.selectedRowsCount }</h1>
+                
+                <div class="input-group">
+                    <lightning:button label="Reset Columns" onclick="{! c.resetColumns }"/>
+                </div>
+            </div>
+            
+            <!-- the container element determine the height of the datatable -->
+            <div>
+                <lightning:datatable
+                                     columns="{! v.columns }"
+                                     data="{! v.data }"
+                                     keyField="{! v.keyField }"
+                                     resizeStep="20"
+                                     sortedBy="{! v.sortedBy }"
+                                     sortedDirection="{! v.sortedDirection }"
+                                     defaultSortDirection="{! v.defaultSortDirection }"
+                                     showRowNumberColumn="{! v.showRowNumberColumn }"
+                                     rowNumberOffset="{! v.rowNumberOffset }"
+                                     onrowselection="{! c.updateSelectedText }"
+                                     onrowaction="{! c.handleRowAction }"
+                                     onresize="{! c.storeColumnWidths }"
+                                     onsort="{! c.updateColumnSorting }"
+                                     />
+            </div>
+            <aura:if isTrue="{! v.isLoading }">
+                <lightning:spinner alternativeText="Loading"/>
+            </aura:if>
+        </div>
+        {!v.body}
+        
+    </lightning:card>
+</aura:component>

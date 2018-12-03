@@ -1,0 +1,12 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" >
+    //Record Selection, prior summary selector (stored query or stored list of IDs)
+    <br/>
+    //Make summary, conditionally highlight, make field
+    <br/>
+    //data table
+    <br/>
+    //summary outcome list, option to paste value somewhere (account.TotalEvents)
+    <br/>
+    <br/>
+    <c:aTable/>
+</aura:component>
